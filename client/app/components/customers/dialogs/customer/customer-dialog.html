@@ -1,0 +1,198 @@
+<!-- DIALOG -->
+<md-dialog class="customer-dialog" aria-label="New Task">
+
+    <form name="customerForm" class="md-inline-form" novalidate>
+
+        <!-- DIALOG TOOLBAR -->
+        <md-toolbar class="md-accent md-tall" layout="column">
+
+            <!-- TOOLBAR TOP -->
+            <div class="md-toolbar-tools md-toolbar-tools-top" layout="row" layout-align="space-between center">
+                <span class="title">{{vm.title}}</span>
+                <md-button class="md-icon-button" ng-click="vm.closeDialog()" aria-label="Close dialog" translate
+                           translate-attr-aria-label="CUSTOMERS.CLOSE_DIALOG">
+                    <md-icon md-font-icon="icon-close"></md-icon>
+                </md-button>
+            </div>
+            <!-- / TOOLBAR TOP -->
+
+            <!-- TOOLBAR MIDDLE -->
+            <div class="md-toolbar-tools md-toolbar-tools-middle" flex layout="column" layout-align="center center">
+                <div layout="column" layout-align="center center">
+                    <img ng-src="{{vm.customer.avatar}}" class="md-avatar avatar customer-avatar huge"
+                         alt="{{vm.customer.name.first}}"/>
+                    <div class="customer-name">{{vm.customer.name.first + ' ' + vm.customer.name.last}}</div>
+                </div>
+            </div>
+            <!-- / TOOLBAR MIDDLE -->
+
+            <!--  TOOLBAR BOTTOM -->
+            <div class="md-toolbar-tools md-toolbar-tools-bottom" layout="row" layout-align="center center">
+
+                <div flex layout="row" layout-align="center center">
+
+                    <md-button class="md-icon-button"
+                               ng-click="vm.customer.star = !vm.customer.star"
+                               aria-label="Toggle starred" translate
+                               translate-attr-aria-label="CUSTOMERS.TOGGLE_STARRED">
+                        <md-icon ng-if="vm.customer.star === true" md-font-icon="icon-star"
+                                 class="amber-fg"></md-icon>
+                        <md-icon ng-if="vm.customer.star !== true"
+                                 md-font-icon="icon-star-outline"></md-icon>
+                    </md-button>
+
+                    <md-menu>
+                        <md-button class="md-icon-button" aria-label="More" translate
+                                   translate-attr-aria-label="TODO.MORE">
+                            <md-icon md-font-icon="icon-account-multiple-plus" ng-click="$mdOpenMenu($event)"></md-icon>
+                        </md-button>
+
+                        <md-menu-content width="3">
+                            <md-list-item ng-if="vm.user.groups" ng-repeat="group in vm.user.groups">
+                                <p class="pl-8"
+                                   ng-style="vm.exists(vm.customer.id,group.customerIds) && {'font-weight':'500'}">
+                                    {{group.name}}
+                                </p>
+                            </md-list-item>
+
+                        </md-menu-content>
+                    </md-menu>
+                </div>
+            </div>
+            <!-- / TOOLBAR BOTTOM -->
+
+        </md-toolbar>
+        <!-- / DIALOG TOOLBAR -->
+
+        <!-- DIALOG CONTENT -->
+        <md-dialog-content ms-scroll>
+
+            <md-input-container class="md-icon-float md-block">
+                <label translate="CUSTOMERS.NAME_REQUIRED">First Name</label>
+                <md-icon md-font-icon="icon-account" class="name"></md-icon>
+                <input ng-model="vm.customer.name.first" type="text" ng-required md-autofocus>
+            </md-input-container>
+
+            <md-input-container class="md-icon-float md-block">
+                <label translate="CUSTOMERS.LAST_NAME">Last Name</label>
+                <md-icon></md-icon>
+                <input ng-model="vm.customer.name.last" type="text">
+            </md-input-container>
+
+            <md-input-container class="md-icon-float md-block">
+              <label>Gender</label>
+              <md-icon md-font-icon="icon-human" class="name"></md-icon>
+              <md-select ng-model="vm.customer.gender">
+                <md-option ng-repeat="gender in [{value :'w',title : 'Woman'},{value :'m',title : 'Man'}]" value="{{gender.value}}">
+                  {{gender.title}}
+                </md-option>
+              </md-select>
+            </md-input-container>
+
+          <md-input-container>
+            <label>Birthday</label>
+            <md-datepicker class="birthday-input" ng-model="vm.customer.birthday" ng-required="false">
+            </md-datepicker>
+          </md-input-container>
+
+          <md-input-container>
+            <label>Last Contact</label>
+            <md-datepicker class="birthday-input" ng-model="vm.customer.lastContact"
+                           ng-required="false">
+            </md-datepicker>
+          </md-input-container>
+
+
+
+            <md-input-container class="md-icon-float md-icon-right md-block">
+              <label>Customer Lifetime Value</label>
+              <md-icon></md-icon>
+              <input flex="100" ng-model="vm.customer.customerLifeTimeValue" type="number" step="0.01">
+            </md-input-container>
+
+
+            <div ng-if="!vm.allFields" layout="row" layout-align="center center">
+                <md-button class="md-accent" ng-click="vm.allFields = true" translate="CUSTOMERS.SHOW_ALL_FIELDS">Show
+                    All Fields
+                </md-button>
+            </div>
+
+            <div ng-if="vm.allFields">
+                <md-input-container class="md-icon-float md-block">
+                    <label>Phone Number</label>
+                    <md-icon md-font-icon="icon-phone"></md-icon>
+                    <input ng-model="vm.customer.phone" type="text">
+                </md-input-container>
+
+                <md-input-container class="md-icon-float md-block">
+                    <label>Email</label>
+                    <md-icon md-font-icon="icon-email" class="email"></md-icon>
+                    <input ng-model="vm.customer.email" type="email">
+                </md-input-container>
+
+
+                <md-input-container class="md-icon-float md-block">
+                    <label>Company</label>
+                    <md-icon md-font-icon="icon-domain"></md-icon>
+                    <input ng-model="vm.customer.company" type="text">
+                </md-input-container>
+
+                <md-input-container class="md-icon-float md-block">
+                    <label>Address</label>
+                    <md-icon md-font-icon="icon-home"></md-icon>
+                    <input ng-model="vm.customer.address" type="text">
+                </md-input-container>
+
+                <div layout="row" class="md-block textarea-wrapper" layout-align="start start">
+                    <md-icon md-font-icon="icon-note"></md-icon>
+                    <md-input-container flex>
+                        <label translate translate-attr-placeholder="CUSTOMERS.NOTES">Notes</label>
+                        <textarea ng-model="vm.customer.notes" type="text" max-rows="4"></textarea>
+                    </md-input-container>
+                </div>
+
+                <div layout="row" layout-align="center center">
+                    <md-button class="md-accent" ng-click="vm.allFields = false" translate="CUSTOMERS.FEWER_FIELDS">Fewer
+                        Fields
+                    </md-button>
+                </div>
+
+            </div>
+
+        </md-dialog-content>
+        <!-- / DIALOG CONTENT -->
+
+        <!-- DIALOG ACTIONS -->
+        <md-dialog-actions layout="row" layout-align="space-between center">
+            <div layout="row" layout-align="start center">
+                <md-button type="submit" ng-if="!vm.newCustomer" ng-click="vm.saveCustomer()"
+                           class="send-button md-accent md-raised"
+                           ng-disabled="customerForm.$invalid || customerForm.$pristine"
+                           aria-label="SAVE" translate="CUSTOMERS.SAVE" translate-attr-aria-label="CUSTOMERS.SAVE">
+                    SAVE
+                </md-button>
+
+                <md-button type="submit" ng-if="vm.newCustomer" ng-click="vm.addNewCustomer()"
+                           class="send-button md-accent md-raised"
+                           ng-disabled="customerForm.$invalid || customerForm.$pristine"
+                           aria-label="Add Task" translate="CUSTOMERS.ADD_CUSTOMER"
+                           translate-attr-aria-label="CUSTOMERS.ADD_CUSTOMER">
+                    ADD CUSTOMER
+                </md-button>
+
+            </div>
+
+            <div layout="row">
+                <md-button class="md-icon-button" ng-click="vm.deleteCustomerConfirm($event)" aria-label="Delete"
+                           translate translate-attr-aria-label="CUSTOMERS.DELETE">
+                    <md-icon md-font-icon="icon-delete"></md-icon>
+                    <md-tooltip><span translate="CUSTOMERS.DELETE">DELETE</span></md-tooltip>
+                </md-button>
+            </div>
+        </md-dialog-actions>
+        <!-- / DIALOG ACTIONS -->
+
+    </form>
+
+</md-dialog>
+<!-- / DIALOG -->

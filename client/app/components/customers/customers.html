@@ -1,0 +1,307 @@
+<div id="customers" class="page-layout simple left-sidenav inner-sidenav">
+
+  <!-- HEADER -->
+  <div class="header md-accent-bg" layout="row" layout-align="space-between center">
+
+    <!-- APP TITLE -->
+    <div layout="row" layout-align="start center">
+      <md-button class="md-icon-button sidenav-toggle" hide-gt-md ng-click="$ctrl.toggleSidenav('sidenav')"
+                 aria-label="Toggle sidenav" translate translate-attr-aria-label="CUSTOMERS.TOGGLE_SIDENAV">
+        <md-icon md-font-icon="icon-menu" class="icon"></md-icon>
+      </md-button>
+
+      <div class="logo" layout="row" layout-align="start center">
+                <span class="logo-icon">
+                    <md-icon md-font-icon="icon-account-box" class="s24"></md-icon>
+                </span>
+        <span class="logo-text" translate="CUSTOMERS.CUSTOMERS">Customers</span>
+      </div>
+    </div>
+    <!-- / APP TITLE -->
+
+    <!-- SEARCH -->
+    <div class="search-input-wrapper" layout="row" layout-align="start center">
+      <label for="search">
+        <md-icon md-font-icon="icon-magnify"></md-icon>
+      </label>
+      <md-input-container md-no-float class="m-0">
+        <input id="search" placeholder="Search for anyone" type="text" ng-model="$ctrl.search" translate
+               translate-attr-placeholder="CUSTOMERS.SEARCH_FOR_ANYONE">
+      </md-input-container>
+    </div>
+    <!-- / SEARCH -->
+
+  </div>
+  <!-- / HEADER -->
+
+  <!-- SELECTED BAR -->
+  <div ng-show="$ctrl.selectedCustomers.length > 0" class="selected-bar header animate-slide-down md-accent-bg"
+       layout="row" layout-align="start center">
+
+    <div class="close-button-wrapper" ng-click="$ctrl.selectedCustomers =[]">
+      <md-button layout="row" layout-align="start center">
+        <md-icon md-font-icon="icon-arrow-left" class="mr-8"></md-icon>
+        <span translate="CUSTOMERS.BACK">Back</span>
+      </md-button>
+    </div>
+
+    <div flex layout="row" layout-align="space-between center">
+
+      <div>
+                <span class="selected-customers-count">
+                    <span>{{$ctrl.selectedCustomers.length}}</span>
+                    <span translate="CUSTOMERS.SELECTED">selected</span>
+                </span>
+
+        <md-menu class="select-menu" ng-if="!$ctrl.currentThread">
+          <md-button class="md-icon-button"
+                     ng-click="$mdOpenMenu($event)"
+                     aria-label="multi select toggle"
+                     translate translate-attr-aria-label="CUSTOMERS.MULTI_SELECT_TOGGLE">
+            <md-icon md-font-icon="icon-menu-down"></md-icon>
+          </md-button>
+          <md-menu-content width="3">
+            <md-menu-item>
+              <md-button ng-click="$ctrl.selectAllCustomers()" translate="CUSTOMERS.SELECT_ALL">
+                Select all
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-click="$ctrl.deselectCustomers()" translate="CUSTOMERS.SELECT_NONE">
+                Select none
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+      </div>
+
+      <div class="multi-select-actions">
+        <md-button class="md-icon-button" ng-click="$ctrl.deleteSelectedCustomers($event)"
+                   aria-label="delete selected" translate translate-attr-label="CUSTOMERS.DELETE_SELECTED">
+          <md-icon md-font-icon="icon-delete"></md-icon>
+        </md-button>
+      </div>
+
+    </div>
+
+  </div>
+  <!-- / SELECTED BAR -->
+
+  <!-- CONTENT -->
+  <div class="content" md-background-bg layout="row" layout-align="start start">
+
+    <!-- SIDENAV -->
+    <md-sidenav class="sidenav main-sidenav md-white-bg" md-is-locked-open="$mdMedia('gt-md')"
+                layout="column" flex="100" md-component-id="sidenav"
+                ms-sidenav-helper ng-include="'app/components/customers/main-sidenav/main-sidenav.html'">
+    </md-sidenav>
+    <!-- / SIDENAV -->
+
+    <!-- MAIN -->
+    <div class="main scrollable">
+
+      <!-- CUSTOMER LIST -->
+      <md-list class="customers-list">
+
+        <!-- CUSTOMER LIST HEADER -->
+        <md-subheader class="md-no-sticky md-white-bg">
+
+          <div layout="row" layout-align="space-between center">
+
+            <div class="list-title" layout="row" layout-align="start center"
+                 ng-hide="editGroupForm.$visible">
+              <span ng-if="$ctrl.listType === 'all'" translate="CUSTOMERS.ALL_CUSTOMERS">All customers</span>
+              <span ng-if="$ctrl.listType === 'frequent'" translate="CUSTOMERS.FREQUENTLY_CUSTOMERED">Frequnetly
+                                customered</span>
+              <span ng-if="$ctrl.listType === 'starred'" translate="CUSTOMERS.STARRED_CUSTOMERS">Starred
+                                customers</span>
+              <span ng-if="$ctrl.listType.name">{{$ctrl.listType.name}}</span>
+
+              <span ng-if="filteredCustomers.length" class="secondary-text customers-count">
+                                ({{filteredCustomers.length}})
+                            </span>
+            </div>
+
+            <div class="edit-group-form" ng-show="$ctrl.listType.name" layout="row"
+                 layout-align="start center">
+                            <span ng-show="editGroupForm.$visible"
+                                  editable-text="$ctrl.listType.name"
+                                  e-form="editGroupForm"
+                                  onaftersave="$ctrl.editGroup()">
+                            </span>
+
+              <md-button class="md-icon-button edit-group-button" ng-click="editGroupForm.$show()"
+                         ng-hide="editGroupForm.$visible" aria-label="edit group name" translate
+                         translate-attr-label="CUSTOMERS.EDIT_GROUP_NAME">
+                <md-icon md-font-icon="icon-pencil s18"></md-icon>
+              </md-button>
+
+              <md-button class="md-icon-button edit-group-button" ng-click="$ctrl.deleteGroup($event)"
+                         ng-hide="editGroupForm.$visible" aria-label="delete group" translate
+                         translate-attr-label="CUSTOMERS.DELETE_GROUP">
+                <md-icon md-font-icon="icon-delete s18"></md-icon>
+              </md-button>
+            </div>
+
+            <div flex></div>
+
+            <md-menu>
+
+              <md-button class="md-icon-button" aria-label="Sort" translate
+                         translate-attr-aria-label="CUSTOMERS.SORT">
+                <md-icon md-font-icon="icon-sort-alphabetical"
+                         ng-click="$mdOpenMenu($event)"></md-icon>
+              </md-button>
+
+              <md-menu-content width="3">
+
+                <md-menu-item>
+                  <md-button ng-click="$ctrl.listOrder = 'name.first';$ctrl.listOrderAsc = false"
+                             ng-style="$ctrl.listOrder === 'name.first' && $ctrl.listOrderAsc=== false && {'font-weight':'500'}">
+                    <span translate="CUSTOMERS.FIRST_NAME">First Name</span>
+                    <small translate="CUSTOMERS.A_TO_Z">(A to Z)</small>
+                  </md-button>
+                </md-menu-item>
+
+                <md-menu-item>
+                  <md-button ng-click="$ctrl.listOrder = 'name.first'; $ctrl.listOrderAsc = true"
+                             ng-style="$ctrl.listOrder === 'name.first' && $ctrl.listOrderAsc=== true && {'font-weight':'500'}">
+                    <span translate="CUSTOMERS.FIRST_NAME">First Name</span>
+                    <small translate="CUSTOMERS.Z_TO_A">(Z to A)</small>
+                  </md-button>
+                </md-menu-item>
+
+                <md-menu-item>
+                  <md-button ng-click="$ctrl.listOrder = 'name.last';$ctrl.listOrderAsc = false"
+                             ng-style="$ctrl.listOrder === 'name.last' && $ctrl.listOrderAsc=== false && {'font-weight':'500'}">
+                    <span translate="CUSTOMERS.LAST_NAME">Last Name</span>
+                    <small translate="CUSTOMERS.A_TO_Z">(A to Z)</small>
+                  </md-button>
+                </md-menu-item>
+
+                <md-menu-item>
+                  <md-button ng-click="$ctrl.listOrder = 'name.last'; $ctrl.listOrderAsc = true"
+                             ng-style="$ctrl.listOrder === 'name.last' && $ctrl.listOrderAsc=== true && {'font-weight':'500'}">
+                    <span translate="CUSTOMERS.LAST_NAME">Last Name</span>
+                    <small translate="CUSTOMERS.Z_TO_A">(Z to A)</small>
+                  </md-button>
+                </md-menu-item>
+
+              </md-menu-content>
+
+            </md-menu>
+
+          </div>
+
+        </md-subheader>
+        <!-- / CUSTOMER LIST HEADER -->
+
+        <!-- CUSTOMER ITEM -->
+        <md-list-item class="customer-item md-white-bg" md-ink-ripple
+                      ng-repeat="customer in $ctrl.customers | filter: $ctrl.search | filter: global.search |  orderBy: $ctrl.listOrder :$ctrl.listOrderAsc | filter:query as filteredCustomers track by customer._id "
+                      ng-click="$ctrl.openCustomerDialog($event, customer)"
+                      ng-style="{'transform': 'translate3d(0px, '+$index * 100+'%, 0px)', 'z-index': filteredCustomers.length - $index}"
+                      ng-class="{'selected': $ctrl.isSelected(customer)}">
+
+          <md-checkbox ng-checked="$ctrl.exists(customer, $ctrl.selectedCustomers)"
+                       ng-click="$ctrl.toggleSelectCustomer(customer, $event)"
+                       aria-label="{{$ctrl.exists(customer, $ctrl.selectedCustomers) ? 'Deselect' : 'Select'}}">
+          </md-checkbox>
+
+          <img class="md-avatar" ng-if="customer.avatar" alt="{{customer.name}}"
+               ng-src="{{customer.avatar}}"/>
+
+          <p class="text-truncate font-weight-600">{{customer.name.last}}, {{customer.name.first}}</p>
+          <p class="hide show-gt-sm">
+            <md-icon md-font-icon="icon-human" ng-if="customer.gender == 'w'" style="color : rgb(233,30,99)"></md-icon>
+            <md-icon md-font-icon="icon-human" ng-if="customer.gender == 'm'" style="color : rgb(63,81,181)"></md-icon>
+          </p>
+
+          <p class="phone text-truncate hide show-gt-md">
+            {{customer.birthday | date}}
+          </p>
+
+          <p class="job-title text-truncate hide show-gt-lg">
+            {{customer.lastContact | altDate}}
+          </p>
+          <p class="job-title text-truncate hide show-gt-lg">
+            {{customer.customerLifetimeValue}}
+          </p>
+          <p class="job-title text-truncate hide show-gt-lg">
+            {{customer.company}}
+          </p>
+          <div class="actions" layout="row" layout-align="start center">
+            <md-button class="md-icon-button  hide show-gt-xs"
+                       ng-click="$event.stopPropagation();$ctrl.starCustomer(customer)"
+                       aria-label="Toggle starred" translate
+                       translate-attr-aria-label="CUSTOMERS.TOGGLE_STARRED">
+              <md-icon ng-if="customer.star === true" md-font-icon="icon-star"
+                       class="amber-fg"></md-icon>
+              <md-icon ng-if="customer.star !== true"
+                       md-font-icon="icon-star-outline"></md-icon>
+            </md-button>
+
+            <md-menu>
+              <md-button class="md-icon-button" aria-label="More" translate
+                         translate-attr-aria-label="CUSTOMERS.MORE">
+                <md-icon md-font-icon="icon-dots-vertical" ng-click="$mdOpenMenu($event)"></md-icon>
+              </md-button>
+
+              <md-menu-content width="3">
+                <md-menu-item>
+                  <md-button ng-click="$ctrl.deleteCustomerConfirm(customer, ev)"
+                             translate="CUSTOMERS.DELETE_CUSTOMER">
+                    Delete Customer
+                  </md-button>
+                </md-menu-item>
+
+                <md-divider ng-if="$ctrl.user.groups"></md-divider>
+
+                <md-subheader class="md-no-sticky" ng-if="$ctrl.user.groups">Groups</md-subheader>
+
+                <md-list-item ng-if="$ctrl.user.groups" ng-repeat="group in $ctrl.user.groups"
+                              ng-click="$ctrl.toggleInArray(customer._id,group.customerIds)">
+                  <p class="pl-8"
+                     ng-style="$ctrl.exists(customer._id,group.customerIds) && {'font-weight':'500'}">
+                    {{group.name}}
+                  </p>
+                </md-list-item>
+
+              </md-menu-content>
+            </md-menu>
+
+          </div>
+
+        </md-list-item>
+        <!-- CUSTOMER ITEM -->
+
+      </md-list>
+      <!-- / CUSTOMER LIST -->
+
+      <!-- NO RESULTS -->
+      <md-list-item class="no-results md-white-bg" ng-show="filteredCustomers.length === 0">
+        <p translate="CUSTOMERS.NO_RESULTS">No results..</p>
+      </md-list-item>
+      <!-- / NO RESULTS -->
+
+    </div>
+    <!-- / MAIN -->
+
+  </div>
+  <!-- / CONTENT -->
+
+  <!-- BULK INSERT CUSTOMER BUTTON -->
+  <md-button class="md-fab md-icon-button" id="bulk-customer-button" ng-click="$ctrl.importData($event)"
+             aria-label="bulk customer" translate translate-attr-aria-label="CUSTOMERS.BULK_CUSTOMER">
+    <md-icon md-font-icon="icon-data"></md-icon>
+  </md-button>
+  <!-- / ADD CUSTOMER BUTTON -->
+
+  <!-- ADD CUSTOMER BUTTON -->
+  <md-button class="md-fab md-accent md-icon-button" id="add-customer-button" ng-click="$ctrl.openCustomerDialog($event)"
+             aria-label="add customer" translate translate-attr-aria-label="CUSTOMERS.ADD_CUSTOMER">
+    <md-icon md-font-icon="icon-account-plus"></md-icon>
+  </md-button>
+  <!-- / ADD CUSTOMER BUTTON -->
+
+</div>

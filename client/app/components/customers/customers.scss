@@ -1,0 +1,261 @@
+customers{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgb(245,245,245);
+}
+
+.amber-fg {
+    color: #FFC107 !important;
+}
+
+#customers {
+    position: relative;
+    height: auto;
+    min-height: 100%;
+    overflow: hidden;
+    > .header {
+        height: 76px;
+        min-height: 76px;
+        max-height: 76px;
+        padding: 24px;
+        background-image: url(/assets/images/header-bg.png);
+        background-size: cover;
+        background-color: rgb(3,155,229);
+        color: rgba(255,255,255,1);
+
+        .logo {
+
+            .logo-icon {
+                margin: 0 16px 0 0;
+            }
+
+            .logo-text {
+                font-size: 24px;
+            }
+        }
+
+        md-icon {
+            color: #FFFFFF;
+        }
+
+        .search-input-wrapper {
+            position: relative;
+
+            label {
+                padding-right: 4px;
+                cursor: pointer;
+
+                md-icon {
+                    color: rgba(255, 255, 255, 0.8);
+                }
+
+            }
+
+            md-input-container {
+
+                .md-errors-spacer {
+                    display: none;
+                }
+
+                input {
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+                    color: rgba(255, 255, 255, 0.8);
+                    width: 240px;
+
+                    &::placeholder {
+                        color: rgba(255, 255, 255, 0.8);
+                    }
+
+                    &:focus {
+                        border-bottom: 1px solid white;
+                        color: white;
+                    }
+                }
+            }
+        }
+
+        &.selected-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            background-image: none;
+            opacity: 1 !important;
+
+            .close-button-wrapper {
+                width: 244px;
+            }
+        }
+    }
+
+    > .content {
+        position: absolute;
+        top: 76px;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        padding: 24px;
+
+        > md-sidenav {
+            box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+            padding: 0;
+            margin-right: 24px;
+            background-color: #FFFFFF !important;
+            color: rgba(0, 0, 0, 0.87);
+
+        }
+
+        .sidenav.md-locked-open {
+            width: 220px;
+            min-width: 220px;
+            max-width: 220px;
+            z-index: 2;
+            box-shadow: none;
+            background: transparent;
+            box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+            padding: 0;
+        }
+
+        .main {
+            padding: 16px 90px 0 4px;
+            position: absolute;
+            top: 0;
+            left: 24px;
+            right: 0;
+            bottom: 0;
+            overflow: auto;
+
+            .customers-list {
+                position: relative;
+                padding-bottom: 0;
+
+                .md-subheader {
+                    box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.14);
+                    border-bottom: 1px solid rgba(0, 0, 0, 0.14);
+                    background-color: white;
+
+                    ._md-subheader-inner {
+                        padding: 16px;
+                    }
+
+                    .customers-count {
+                        padding-left: 4px;
+                    }
+
+                    .list-title {
+                        margin-right: 4px;
+                    }
+
+                    .edit-group-form {
+
+                        .editable-controls {
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            justify-content: flex-start;
+
+                            .editable-input {
+                                border: 1px solid rgba(0, 0, 0, 0.2);
+                                padding: 4px 6px;
+                                margin-right: 6px;
+                                font-size: 13px;
+                            }
+
+                            .editable-buttons {
+
+                            }
+                        }
+
+                        .edit-group-button {
+                            margin: 0;
+                        }
+
+                        .md-button {
+                            margin: 0;
+                            margin: 0;
+                            padding: 0;
+                            height: 32px;
+                            min-height: 32px;
+                            line-height: 32px;
+                            width: 32px;
+                        }
+                    }
+                }
+
+                .customer-item {
+                    position: absolute;
+                    right: 0;
+                    left: 0;
+                    width: 100%;
+                    box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.14);
+                    background: white;
+                    transition: transform 200ms ease-out;
+                    will-change: transform;
+
+                    &:last-of-type {
+                        margin-bottom: 24px;
+                    }
+
+                    &.ng-leave {
+                        transform: translateY(0);
+                        display: none;
+
+                        &.ng-leave-active {
+                            transform: translateY(-100%);
+                        }
+                    }
+
+                    &.ng-hide {
+                        display: none;
+                    }
+
+                    &.ng-hide-add-active,
+                    &.ng-hide-remove-active {
+                        display: block;
+                        transition-property: all;
+                    }
+                }
+            }
+
+            .no-results {
+                box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.14);
+            }
+        }
+    }
+
+    #add-customer-button {
+        position: fixed;
+        bottom: 8px;
+        right: 8px;
+        padding: 0;
+        color: rgb(255,255,255);
+        background-color: rgb(3,155,229);
+    }
+
+    #bulk-customer-button {
+        position: fixed;
+        bottom: 8px;
+        right: 72px;
+        padding: 0;
+        color: rgb(255,255,255);
+        background-color: rgb(229, 143, 0);
+    }
+}
+
+// RESPONSIVE
+@media screen and (min-width: 1280px) {
+
+    #customers {
+
+        > .content {
+
+            .main {
+                left: 268px;
+            }
+        }
+    }
+}

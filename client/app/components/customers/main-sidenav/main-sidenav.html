@@ -1,0 +1,60 @@
+<!-- SIDENAV HEADER -->
+<div class="header md-padding" layout="row" layout-align="start center">
+
+    <!-- USER -->
+    <img ng-src="{{$ctrl.user.avatar}}" class="md-avatar avatar mr-16"
+         alt="{{$ctrl.user.name}}"/>
+    <span class="font-weight-500 font-size-14">{{$ctrl.user.name}}</span>
+    <!-- / USER -->
+
+</div>
+<!-- / SIDENAV HEADER -->
+
+<md-divider></md-divider>
+
+<!-- SIDENAV CONTENT -->
+<div ms-scroll class="content scrollable">
+
+    <md-list>
+
+        <md-list-item ng-click="$ctrl.filterChange('all')" ng-class="{'selected':$ctrl.listType ==='all'}">
+            <p translate="CUSTOMERS.ALL_CUSTOMERS">
+                All customers
+            </p>
+        </md-list-item>
+
+        <md-list-item ng-click="$ctrl.filterChange('frequent')" ng-class="{'selected':$ctrl.listType ==='frequent'}">
+            <p translate="CUSTOMERS.FREQUENTLY_CUSTOMERED">
+                Frequently customered
+            </p>
+        </md-list-item>
+
+        <md-list-item ng-click="$ctrl.filterChange('starred')" ng-class="{'selected':$ctrl.listType ==='starred'}">
+            <p translate="CUSTOMERS.STARRED_CUSTOMERS">
+                Starred customers
+            </p>
+        </md-list-item>
+
+        <md-divider></md-divider>
+
+        <md-subheader class="md-no-sticky">Groups</md-subheader>
+
+        <md-list-item ng-if="$ctrl.user.groups" ng-repeat="group in $ctrl.user.groups" ng-click="$ctrl.filterChange(group)"
+                      ng-class="{'selected':$ctrl.listType.name === group.name}">
+            <p class="pl-8">
+                {{group.name}}
+            </p>
+        </md-list-item>
+
+        <md-list-item class="new-group-form" ng-show="newListForm.$visible">
+            <p class="pl-8" editable-text="$ctrl.newGroupName" e-form="newListForm" onaftersave="$ctrl.addNewGroup()"></p>
+        </md-list-item>
+
+        <md-list-item class="" ng-click="newListForm.$show()" ng-hide="newListForm.$visible">
+            <p class="pl-8 md-accent-fg" translate="CUSTOMERS.NEW_GROUP">New Group</p>
+        </md-list-item>
+
+    </md-list>
+
+</div>
+<!-- / SIDENAV CONTENT -->
