@@ -1,12 +1,12 @@
 ﻿const config = {
-    name: "BorderGuruSolution",
+    name: "CustomerSolution",
     host: "",
     port: process.env.PORT || 8080,
     version: "1.0.0",
     database: {
         mongo: {
             url: "mongodb://localhost/",
-            db: "border_guru_database"
+            db: "company_database"
         }
     },
     log: {
