@@ -5,8 +5,4 @@ node_modules
 .settings
 *.log
 dist/
-.idea
-.idea/
-.idea/inspectionProfiles/
-.idea/vcs.xml
 /.idea/
