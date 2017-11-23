@@ -4,7 +4,7 @@ class CustomersController {
     "ngInject";
     // Data
     var vm = this;
-    vm.exists = exists
+    vm.exists = exists;
     vm.detectBrowser = detectBrowser;
     vm.guidGenerator =  guidGenerator;
     vm.isMobile  = isMobile;
