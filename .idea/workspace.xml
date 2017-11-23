@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7ae684d8-2b3c-41c0-9e24-bc88474ba730" name="Default" comment="Updated ui router.">
+    <list default="true" id="7ae684d8-2b3c-41c0-9e24-bc88474ba730" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/preferred-vcs.xml" afterPath="$PROJECT_DIR$/.idea/preferred-vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -34,8 +33,8 @@
       <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="5" lean-forward="true" selection-start-line="6" selection-start-column="5" selection-end-line="6" selection-end-column="5" />
+            <state relative-caret-position="136">
+              <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -353,7 +352,7 @@
       <workItem from="1510988548094" duration="18692000" />
       <workItem from="1511027952368" duration="1449000" />
       <workItem from="1511029759458" duration="5032000" />
-      <workItem from="1511355620025" duration="3830000" />
+      <workItem from="1511355620025" duration="3868000" />
     </task>
     <task id="LOCAL-00001" summary="Updated readme.">
       <created>1511029882656</created>
@@ -376,11 +375,18 @@
       <option name="project" value="LOCAL" />
       <updated>1511419867276</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Updated gitignore">
+      <created>1511420575084</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1511420575084</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33415000" />
+    <option name="totallyTimeSpent" value="33453000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -420,7 +426,8 @@
     <MESSAGE value="Updated readme." />
     <MESSAGE value="Updated config." />
     <MESSAGE value="Updated ui router." />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated ui router." />
+    <MESSAGE value="Updated gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated gitignore" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -797,8 +804,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="5" lean-forward="true" selection-start-line="6" selection-start-column="5" selection-end-line="6" selection-end-column="5" />
+        <state relative-caret-position="136">
+          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
           <folding />
         </state>
       </provider>
