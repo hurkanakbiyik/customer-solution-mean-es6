@@ -1,8 +1,9 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
+import ngMaterial from 'angular-material';
 import customersComponent from './customers.component';
 
-let customersModule = angular.module('customers', [
+let customersModule = angular.module('app.customers', [
   uiRouter
 ])
 

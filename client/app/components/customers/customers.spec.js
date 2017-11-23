@@ -31,9 +31,14 @@ describe('Customers', () => {
       });
     });
 
-    it('has a name property', () => { // erase if removing this.name from the controller
-      expect(controller).to.have.property('name');
+    it('has a user property', () => {
+      expect(controller).to.have.property('vm.user');
     });
+
+    it('has a customers property', () => {
+      expect(controller).to.have.property('vm.customers');
+    });
+
   });
 
   describe('View', () => {
