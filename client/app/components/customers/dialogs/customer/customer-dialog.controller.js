@@ -1,7 +1,7 @@
 import './customer-dialog.scss';
 
 class CustomerDialogController {
-  constructor($mdDialog, Customer, Customers, User,Api,ToastService) {
+  constructor($mdDialog, Customer, Customers, User,ApiFactory,ToastService) {
     "ngInject";
     let vm = this;
     vm.title = 'Edit Customer';
@@ -37,7 +37,7 @@ class CustomerDialogController {
         }
       };
 
-      Api.COMPANY.CUSTOMER.create.get(query,
+      ApiFactory.COMPANY.CUSTOMER.create.get(query,
         function(response){
           if(response.error){
             ToastService.error(response.error.data.message);
@@ -64,7 +64,7 @@ class CustomerDialogController {
         }
       };
 
-      Api.COMPANY.CUSTOMER.update.get(query,
+      ApiFactory.COMPANY.CUSTOMER.update.get(query,
         function(response){
           if(response.error){
             ToastService.error(response.error.data.message);
@@ -107,7 +107,7 @@ class CustomerDialogController {
         }
       };
 
-      Api.COMPANY.CUSTOMER.remove.get(query,
+      ApiFactory.COMPANY.CUSTOMER.remove.get(query,
         function(response){
           if(response.error){
           }else{

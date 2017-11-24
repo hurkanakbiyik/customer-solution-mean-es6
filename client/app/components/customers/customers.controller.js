@@ -1,6 +1,6 @@
 import CustomerDialogController from './dialogs/customer/customer-dialog.controller';
 class CustomersController {
-  constructor($scope, $mdSidenav, $mdDialog, $document,Api,ToastService) {
+  constructor($scope, $mdSidenav, $mdDialog, $document,ApiFactory,ToastService) {
     "ngInject";
     // Data
     var vm = this;
@@ -101,7 +101,7 @@ class CustomersController {
         }
       };
 
-      Api.COMPANY.CUSTOMER.update.get(query,
+      ApiFactory.COMPANY.CUSTOMER.update.get(query,
         function(response){
           if(response.error){
           }else{
@@ -123,7 +123,7 @@ class CustomersController {
         }
       };
 
-      Api.COMPANY.CUSTOMER.remove.get(query,
+      ApiFactory.COMPANY.CUSTOMER.remove.get(query,
         function(response){
           if(response.error){
           }else{
@@ -200,7 +200,7 @@ class CustomersController {
 
         }
       };
-      Api.COMPANY.CUSTOMER.find.get(query,
+      ApiFactory.COMPANY.CUSTOMER.find.get(query,
         function(response){
           if(response.error){
 
@@ -223,7 +223,7 @@ class CustomersController {
         }
       };
 
-      Api.COMPANY.CUSTOMER.bulkCreate.get(query,
+      ApiFactory.COMPANY.CUSTOMER.bulkCreate.get(query,
         function(response){
           if(response.error){
 

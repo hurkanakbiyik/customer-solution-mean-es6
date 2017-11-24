@@ -15,13 +15,14 @@ import moment from 'moment';
 
 angular.module('app', [
     uiRouter,
-    Common,
-    Components,
     ngMaterial,
     ngResource,
     angularSanitize,
     angularTranslate,
-    angularTranslatePartialLoader
+    angularTranslatePartialLoader,
+    Common,
+    Components
+
   ])
   .config(($locationProvider,$translateProvider,$translatePartialLoaderProvider) => {
     "ngInject";
@@ -39,7 +40,7 @@ angular.module('app', [
   })
 
   .component('app', AppComponent)
-  .factory('Api', ApiFactory)
+  .factory('ApiFactory', ApiFactory)
   .factory('ToastService', ToastService)
   .filter('altDate', altDate);
 

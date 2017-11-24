@@ -1,9 +1,14 @@
 import CustomersModule from './customers'
-
+import ApiFactory from "../../api.factory";
+import ToastService from "../../toast.service";
+import ngResource from 'angular-resource';
 describe('Customers', () => {
-  let $rootScope, $state, $location, $componentController, $compile;
-
+  let $rootScope, $state, $location, $componentController, $compile,$mdSidenav,$mdToast,$resource;
+  window.module.sharedInjector();
   beforeEach(window.module(CustomersModule));
+  beforeEach(window.module(ApiFactory));
+  beforeEach(window.module(ToastService));
+  beforeEach(window.module(ngResource));
 
   beforeEach(inject(($injector) => {
     $rootScope = $injector.get('$rootScope');
@@ -11,6 +16,9 @@ describe('Customers', () => {
     $state = $injector.get('$state');
     $location = $injector.get('$location');
     $compile = $injector.get('$compile');
+    $mdSidenav = $injector.get('$mdSidenav');
+    $mdToast = $injector.get('$mdToast');
+    $resource = $injector.get('$resource');
   }));
 
   describe('Module', () => {
